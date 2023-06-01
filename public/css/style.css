@@ -1,0 +1,90 @@
+body {
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    position: relative;
+    animation-name: tophelp;
+    animation-duration: 2s;
+    margin: 0;
+}
+
+#title {
+    font-family: "Garamond";
+    font-weight: bolder;
+    color:#3a314f;
+}
+
+#home {
+    font-family: "Courier New";
+    color:lavenderblush;
+}
+
+.pad {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 1%;
+
+}
+
+button.btn {
+    background-color:#55496e;
+}
+
+
+
+
+@keyframes tophelp {
+    from {top: -75px; opacity: 0}
+    to {top: 0px; opacity: 1}
+}
+
+.purple-text {
+    color: #55496e;
+}
+
+
+.jumbotron {
+    background-color: #e2d6fa;
+    text-align: center;
+}
+
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+.form-signin .checkbox {
+    font-weight: 400;
+}
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#aboutme{
+    width: 250px;
+    height: 100px;
+}
+
+
+
+.add-bottom-space{
+    margin-bottom: 20px;
+}
