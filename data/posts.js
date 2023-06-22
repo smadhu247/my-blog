@@ -21,9 +21,13 @@ async function createPost(title, content) {
     const postsCollection = await posts();
     const post = await postsCollection.findOne({ title: title });
 
+    let today = new Date().toISOString().slice(0, 10)
+
     let newPost = {
         title: title,
-        content: content
+        content: content,
+        date: today,
+        author: "Sanjana Madhu"
     };
 
     const insertInfo = await postsCollection.insertOne(newPost);

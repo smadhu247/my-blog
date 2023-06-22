@@ -22,20 +22,34 @@ async function errorCheckPost(title, content) {
 }
 
 router.get('/', async (req, res) => {
+    let log_in_bool = true
+    if (isAuth) {
+        log_in_bool = false
+    }   
     try{
-        return res.status(200).render('pages/home', {title: "Sanjana Madhu", error: false});
+        return res.status(200).render('pages/home', {title: "Sanjana Madhu", error: false, login: log_in_bool});
     } catch (e) {
-        return res.render('pages/error', {title: "Error", error: e});
+        return res.render('pages/error', {title: "Error", error: e, login: log_in_bool});
     }
-
 });
 
 router.get('/posts', async (req, res) => {
+    let log_in_bool = true
+    let posts
+    if (isAuth) {
+        log_in_bool = false
+    }   
     try{
-        postId = await postsData.getAllPosts();
-        return res.status(200).render('pages/displayallposts', {title: "Sanjana Madhu", error: false});
+        posts = await postsData.getAllPosts();
+        posts.reverse();
+        if (posts.length == 0) {
+            return res.status(200).render('pages/displayallposts', {title: "Blog Posts", error: false, login: log_in_bool, isPost: false, post: posts});
+        }
+        else{
+            return res.status(200).render('pages/displayallposts', {title: "Blog Posts", error: false, login: log_in_bool, isPost: true, post: posts});
+        }
     } catch (e) {
-        return res.render('pages/error', {title: "Error", error: e});
+        return res.render('pages/error', {title: "Error", error: e, login: log_in_bool});
     }
 });
 
@@ -48,35 +62,10 @@ router.get('/title', async (req, res) => {
     }
 });
 
-async function errorCheckLogin(username, password) {
-
-    if(!username) throw "username parameter not provided";
-    if(!password) throw "password parameter not provided";
-
-    if(typeof username != "string") throw "username parameter is not a string";
-    if(typeof password != "string") throw "password parameter is not a string";
-
-    username = username.toLowerCase();
-    username = username.trim();
-    password = password.trim();
-
-    if(username.length == 0) throw "username parameter is empty";
-    if(password.length == 0) throw "password parameter is empty";
-
-    if(username.length < 4) throw "username must be at least 4 characters long";
-    if(password.length < 6) throw "password must be at least 6 characters long"; 
-
-    if(/\s/.test(username)) throw "username should not contain spaces"
-    if(/\s/.test(password)) throw "password should not contain spaces"
-
-    var alphaNumerics = /^[0-9a-zA-Z]+$/;
-    if(!username.match(alphaNumerics)) throw "username can only contain alphanumeric characters"
-}
-
 router.get('/upload', async (req, res) => {
-    if (!isAuth) {
+    if (isAuth) {
         try{
-            return res.status(200).render('pages/signin', {title: "Sign in",  error: false});
+            return res.status(200).render('pages/post', {title: "Upload post",  error: false});
         } catch (e) {
             return res.render('pages/error', {title: "Error", error: e});
         }
@@ -86,22 +75,20 @@ router.get('/upload', async (req, res) => {
 router.post('/upload', async (req, res) => {
     const postDataBody = req.body;
     let post;
-
     try {
         await errorCheckPost(xss(postDataBody.title), xss(postDataBody.content));
     } catch (e) {
         return res.status(400).render('pages/post', {title: "Upload post", error: true, errorMessage: e});
     }
-
     try {       
-        user = await postsData.createPost(xss(postDataBody.title), xss(postDataBody.content));
+        post = await postsData.createPost(xss(postDataBody.title), xss(postDataBody.content));
       } catch (e) {
         return res.status(400).render('pages/post', {title: "Upload Post", error: true, errorMessage: e});
     }
 
     try {
         if(post.postInserted == true) {
-            return res.redirect('/displayonepost', {title: "Posts"});
+            return res.redirect('/posts');
         }
     } catch (e) {
         return res.status(500).render('pages/error', {title: "Error", error: "Internal Server Error"});
@@ -110,43 +97,38 @@ router.post('/upload', async (req, res) => {
 
 router.get('/login', async (req, res) => {
     if (isAuth) {
-        return res.status(200).render('pages/displayallposts', {title: "Home", error: false});
+        return res.status(200).render('pages/displayallposts', {title: "Home", error: false, login: false});
     }
     try{
-        return res.status(200).render('pages/login', {title: "Login", error: false});
+        return res.status(200).render('pages/login', {title: "Login", error: false, login: false});
     } catch (e) {
-        return res.render('pages/error', {title: "Error", error: e});
+        return res.render('pages/error', {title: "Error", error: e, login: true});
     }
 });
 
 router.post('/login', async (req, res) => {
     const userDataBody = req.body;
-    try {
-        await errorCheckLogin(xss(userDataBody.username), xss(userDataBody.password));
-    } catch (e) {
-        return res.status(400).render('pages/login', {title: "Login", error: true, errorMessage: e});
-    }
     if (userDataBody.username == "smadhu" && userDataBody.password == "Thippanna@7186") {
         try {
             isAuth = true;
-            return res.status(200).render('pages/displayallposts', {title: "Home", error: false});
+            return res.status(200).render('pages/post', {title: "Post", error: false, login: false});
         }
         catch(e) {
-            return res.render('pages/error', {title: "Error", error: e});
+            return res.render('pages/error', {title: "Error", error: e, login: true});
         }
     }
     else {
-        return res.render('pages/error', {title: "Error", error: "Incorrect username or password"});
+        return res.render('pages/error', {title: "Error", error: "Incorrect username or password", login: true});
     }
 });
 
 router.get('/logout', async (req, res) => {
-    req.session.destroy();
+    isAuth = false;
     try {
-        return res.status(200).render('pages/home', {title: "Home", error: false});
+        return res.status(200).render('pages/home', {title: "Home", error: false, login: true});
     }
     catch(e) {
-        return res.render('pages/error', {title: "Error", error: "Error"});
+        return res.render('pages/error', {title: "Error", error: "Error", login: true});
     }
 });
     

@@ -1,0 +1,65 @@
+{{#if error}} 
+      <div>
+            {{errorMessage}}
+        </div>
+{{/if}}
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark mb-4" id="home">
+        <a class="navbar-brand" href="/"><img src="/public/images/home.png" alt="Logo" width="70" height="70"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">About Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/posts">Posts</a>
+                </li>
+            </ul>
+             {{#if login}} 
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                </ul>
+            {{else}}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/upload">Create</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            {{/if}}
+        </div>
+    </nav>
+</header>
+
+
+  <div  id="home">
+        <div class="row justify-content-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card-body p-4 p-md-5">
+                            <h1 class="display-4">Create a post</h1>
+                            <form action = "/upload" method = "POST" id = "post-form" > 
+                                <label for="title"></label>
+                                  <input class="form-control" id = "title_" name = "title" type = "text" placeholder="Title">                                              
+                                <label for="content"></label>
+                                    <textarea class="form-control" id = "content" name = "content" type = "text" placeholder="Content"></textarea>
+                                <br>                                       
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Post!</button>
+                            </form>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+   
+
+
