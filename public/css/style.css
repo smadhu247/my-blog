@@ -7,8 +7,6 @@ body {
     margin: 0;
 }
 
-
-
 #title {
     font-family: "Garamond";
     font-weight: bolder;
@@ -54,11 +52,19 @@ button.btn {
     white-space: pre-line
 }
 
+.footer {
+    padding: 20px 0;
+  }
+  .footer a {
+    color: #55496e;;
+    font-size: 25px;
+    padding: 10px;
+    transition: all .5s ease;
+  }
 
-@keyframes tophelp {
-    from {top: -75px; opacity: 0}
-    to {top: 0px; opacity: 1}
-}
+  .footer a:hover {
+    color: white;
+  }
 
 .purple-text {
     color: #55496e;
