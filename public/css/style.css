@@ -7,6 +7,8 @@ body {
     margin: 0;
 }
 
+
+
 #title {
     font-family: "Garamond";
     font-weight: bolder;
@@ -47,6 +49,10 @@ button.btn {
     background-color:#55496e;
 }
 
+
+.content-space {
+    white-space: pre-line
+}
 
 
 @keyframes tophelp {

@@ -30,8 +30,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/upload">Create</a>
                     </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>
@@ -49,7 +47,9 @@
                             <h1 class="display-4">Create a post</h1>
                             <form action = "/upload" method = "POST" id = "post-form" > 
                                 <label for="title"></label>
-                                  <input class="form-control" id = "title_" name = "title" type = "text" placeholder="Title">                                              
+                                  <input class="form-control" id = "title_" name = "title" type = "text" placeholder="Title"> 
+                                <label for="date"></label>
+                                    <input class="form-control" id = "date" name = "date" type = "date" placeholder="Date">                                             
                                 <label for="content"></label>
                                     <textarea class="form-control" id = "content" name = "content" type = "text" placeholder="Content"></textarea>
                                 <br>                                       

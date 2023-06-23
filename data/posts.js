@@ -4,10 +4,11 @@ const bcrypt = require ('bcrypt');
 const { ObjectId } = require('mongodb');
 const { get } = require('express/lib/request');
 
-async function createPost(title, content) {
+async function createPost(title, content, date) {
 
     if(!title) throw "title parameter not provided";
     if(!content) throw "content parameter not provided";
+    if(!date) throw "content parameter not provided";
 
     if(typeof title != "string") throw "title parameter is not a string";
     if(typeof content != "string") throw "content parameter is not a string";
@@ -17,16 +18,17 @@ async function createPost(title, content) {
 
     if(title.length == 0) throw "title parameter is empty";
     if(content.length == 0) throw "content parameter is empty";
+    if(date.length == 0) throw "content parameter is empty";
 
     const postsCollection = await posts();
     const post = await postsCollection.findOne({ title: title });
 
-    let today = new Date().toISOString().slice(0, 10)
+    // let today = new Date().toISOString().slice(0, 10)
 
     let newPost = {
         title: title,
         content: content,
-        date: today,
+        date: date,
         author: "Sanjana Madhu",
     };
 
@@ -39,7 +41,9 @@ async function createPost(title, content) {
 
 async function getAllPosts() {
     const postsCollection = await posts();
-    const postsList = await postsCollection.find({ }).toArray();
+    const postsList = await postsCollection.find({ }).sort({date:1}).toArray();
+
+    console.log(postsList)
 
     for(let i = 0; i < postsList.length; i++) {
         let id = postsList[i]._id.toString();

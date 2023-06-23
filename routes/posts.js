@@ -60,11 +60,10 @@ router.get('/blogpost/:id', async (req, res) => {
         log_in_bool = false
     } 
     try{
-
         post = await postsData.getPost(req.params.id);
+        console.log(post)
         return res.status(200).render('pages/displayonepost', {title: "Blog Posts", error: false, login: log_in_bool, post: post});
     } catch (e) {
-        console.log(e)
         return res.render('pages/error', {title: "Error", error: "This post does not exist"});
     }
 });
@@ -88,7 +87,7 @@ router.post('/upload', async (req, res) => {
         return res.status(400).render('pages/post', {title: "Upload post", error: true, errorMessage: e});
     }
     try {       
-        post = await postsData.createPost(xss(postDataBody.title), xss(postDataBody.content));
+        post = await postsData.createPost(xss(postDataBody.title), xss(postDataBody.content), xss(postDataBody.date));
       } catch (e) {
         return res.status(400).render('pages/post', {title: "Upload Post", error: true, errorMessage: e});
     }
