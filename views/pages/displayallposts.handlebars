@@ -35,24 +35,37 @@
     </nav>
 </header>
 
-{{#if isPost}}    
-    <div class="container">
-        <div class="row">
-            {{#each post}}
-            <div class="col-md-12">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <a class="blog-link" href="/blogpost/{{this.title}}"><h4>{{this.title}}</h3></a>
-                        <h6 class="date" >Published: {{this.date}}</h6>
+
+{{#if isPost}}  
+{{#each post}} 
+<div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-50 col-xl-100 row-md-10 row-lg-50 row-xl-100">
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <div id="title"> 
+                            <a href="/blogpost/{{this._id}}">
+                                <h2 class="post-title">{{this.title}}</h2>
+                            </a>
+                        </div>
+                        <div> 
+                            <p class="post-meta" id="date">
+                                Posted on {{this.date}}
+                            </p>
+                        </div>
+                        <p class="post-meta text-truncate" id="content-bit" >
+                            {{this.content}}
+                        </p>
                     </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <br>
+                    <!-- Pager-->
+                    {{!-- <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div> --}}
                 </div>
             </div>
-            {{/each}}
         </div>
-    </div>
+        {{/each}}
 {{else}}
     <p> Nothing to see here (yet!) </p>
-{{/if}}
-
-
-
+{{/if}} 

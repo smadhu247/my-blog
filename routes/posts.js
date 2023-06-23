@@ -53,12 +53,19 @@ router.get('/posts', async (req, res) => {
     }
 });
 
-router.get('/title', async (req, res) => {
-
+router.get('/blogpost/:id', async (req, res) => {
+    let post;
+    let log_in_bool = true
+    if (isAuth) {
+        log_in_bool = false
+    } 
     try{
-        postId = await postsData.getPostIdFromTitle(req.params.title);
+
+        post = await postsData.getPost(req.params.id);
+        return res.status(200).render('pages/displayonepost', {title: "Blog Posts", error: false, login: log_in_bool, post: post});
     } catch (e) {
-        return res.render('pages/error', {title: "Error", error: e});
+        console.log(e)
+        return res.render('pages/error', {title: "Error", error: "This post does not exist"});
     }
 });
 

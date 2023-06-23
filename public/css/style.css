@@ -18,12 +18,29 @@ body {
     color:lavenderblush;
 }
 
+#date {
+    color:rgb(223, 214, 217);
+    font-style: italic;
+    font-family: "Courier New";
+}
+
+#content-bit {
+    font-family: "Garamond";
+    font-size:medium;
+}
+
+a:link {
+    color:#3a314f;
+}
+a:hover {
+    color: #8671b6;;
+}
+
 
 .pad {
     padding-left: 10%;
     padding-right: 10%;
     padding-top: 1%;
-
 }
 
 button.btn {
@@ -31,21 +48,6 @@ button.btn {
 }
 
 
-.card {
-    font-family: "Courier New";
-    color:lavenderblush;
-    background-color: #9c8cbd;
-    border-radius: 25px;
-    height: 100%;
-}
-
-.blog-link {
-    color:lavenderblush;
-}
-
-.date {
-    color:rgb(190, 172, 178);
-}
 
 @keyframes tophelp {
     from {top: -75px; opacity: 0}
@@ -85,15 +87,4 @@ button.btn {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-}
-
-#aboutme{
-    width: 250px;
-    height: 100px;
-}
-
-
-
-.add-bottom-space{
-    margin-bottom: 20px;
 }

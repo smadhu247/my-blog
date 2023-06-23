@@ -27,7 +27,7 @@ async function createPost(title, content) {
         title: title,
         content: content,
         date: today,
-        author: "Sanjana Madhu"
+        author: "Sanjana Madhu",
     };
 
     const insertInfo = await postsCollection.insertOne(newPost);
@@ -59,7 +59,7 @@ async function getPost(postId) {
     if(!ObjectId.isValid(postId)) throw "postId provided is not a valid ObjectId";
 
     const postsCollection = await posts();
-    const post = await postsCollection.findOne({ _id: ObjectId(postId) });
+    const post = await postsCollection.findOne({ _id: new ObjectId(postId) });
     if (post === null) throw 'No post with that id';
     post._id = post._id.toString();
     return post;
