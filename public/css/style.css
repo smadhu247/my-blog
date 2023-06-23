@@ -1,11 +1,14 @@
 body {
-    background: rgb(238,174,202);
-    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    /* background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); */
     position: relative;
     animation-name: tophelp;
-    animation-duration: 2s;
+    animation-duration: 2s; 
     margin: 0;
+    height: 1000px; /* Used to enable scrolling */
+    background: linear-gradient(50deg, #d2b1e0 20%, rgba(148,187,233,1) 51%, rgba(238,174,202,1) 90%);
 }
+
 
 #title {
     font-family: "Garamond";
@@ -16,6 +19,7 @@ body {
 #home {
     font-family: "Courier New";
     color:lavenderblush;
+    font-size: large;
 }
 
 #date {
@@ -37,10 +41,31 @@ a:hover {
 }
 
 
-.pad {
-    padding-left: 10%;
-    padding-right: 10%;
+.pad-text {
+    padding-left: 20%;
     padding-top: 1%;
+}
+
+#pad-pic {
+    border-radius: 15px 70px 30px;
+    /* padding-left: 5%; */
+    /* padding-top: 15%; */
+    /* margin-top: 40px; */
+    width: 100%;
+    height: auto;
+}
+
+.pad-squig1 {
+    margin-left: 30%;
+    width: 100%;
+    height: auto;
+}
+
+.pad-squig2 {
+    margin-top: 300px;
+    margin-right: 20px;
+    width: 100%;
+    height: auto;
 }
 
 button.btn {
